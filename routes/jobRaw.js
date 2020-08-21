@@ -15,7 +15,7 @@ const DataKeys = [
     "css", 
     "javascript", 
     "nodejs", 
-    "expressjs", 
+    "express", 
     "mongodb", 
     "sql",
     "react" ,
@@ -31,7 +31,7 @@ const jobSearch = (jobs) => {
     // Initialiser la variable de liste finale
     const res = Array();
 
-    jobs.map((job,i)=>{      
+    jobs.map((job,key_job)=>{      
         // Lancement de mots clés  
         reg = new RegExp(keyword,"gi")
 
@@ -41,12 +41,20 @@ const jobSearch = (jobs) => {
             :job["description"].match(reg)
         );
 
+        
         if( value !== null && value.length > 0  ){
-            value = value.map(function(value) {
-                return value.toLowerCase();
-            }).sort()
+            value = value.map(function(ele,i) {
+                reg = new RegExp(ele,"gi")
+                // value.match('value', 'ig')
+                console.log("******************************************")
+                let red = value.join(" ").match(reg).length;
+                console.log(red)
+                return (ele.toLowerCase() + " x("+red+")" );
+
+            })
             //console.log("arr rex", value)
             job['keywords'] = Array.from(new Set(value));
+            //job['keywords'] = value;
             res.push(
                 //{ [i] : value }
                 job
