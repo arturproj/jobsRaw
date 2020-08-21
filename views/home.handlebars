@@ -1,0 +1,15 @@
+<div class="container">
+    {{#each jobs}}
+        <div class="row border border-danger">
+        <div class="col-lg-6 col-sm-12">
+            <p>{{ this.description }}</p>
+        </div>
+        <div class="col-lg-6 col-sm-12">
+              <ul></ul>{{#each this.keywords}}
+                    <li>{{this}}</li>
+                {{/each}}</ul>
+        </div>
+    </div>
+    {{/each}}
+
+</div>
