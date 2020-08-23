@@ -15,12 +15,23 @@ const DataKeys = [
     "css", 
     "javascript", 
     "nodejs", 
-    "express", 
+    "expressjs", 
     "mongodb", 
     "sql",
-    "react" ,
+    "reactjs",
+    "angularjs",
     "js", 
-    "native"
+    "native",
+    "react-native",
+    "python",
+    "flask",
+    "handlebars",
+    "twig",
+    "ejs",
+    "nosql",
+    "bootstrap",
+    "jquery",
+    "electonjs",
 ];
 
 const jobSearch = (jobs) => {
@@ -43,25 +54,35 @@ const jobSearch = (jobs) => {
 
         
         if( value !== null && value.length > 0  ){
+            tun = Array();
             value = value.map(function(ele,i) {
                 reg = new RegExp(ele,"gi")
-                // value.match('value', 'ig')
-                console.log("******************************************")
                 let red = value.join(" ").match(reg).length;
-                console.log(red)
-                return (ele.toLowerCase() + " x("+red+")" );
-
+                tun.push({tech : ele.toLowerCase(), found : red})
+                return ( ele.toLowerCase() );
             })
-            //console.log("arr rex", value)
+            console.log(
+                value
+            )
+            
             job['keywords'] = Array.from(new Set(value));
-            //job['keywords'] = value;
+            
+            tun.map((ele,i) =>{
+                if ( 
+                        job['keywords'].includes( ele.tech ) === true
+                    ){
+                        job['keywords'][job['keywords'].indexOf( ele.tech )] = ele
+                    }
+            })
+            
+
             res.push(
-                //{ [i] : value }
                 job
             )
         }               
         
     })
+    
     return res;
 }
 
